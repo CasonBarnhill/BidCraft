@@ -79,7 +79,35 @@ namespace BidCraft.web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+
+
+
+
+        //TODO Finish attributes
+        [Display(Name = "First Name")]
+        [Required]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        // public UserType UserType { get; set; }
+
+        public string ProfilePic { get; set; }
+
+        public string Street { get; set; }
+        public string Street2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
+
+
     }
+
+
+
+
+
 
     public class ResetPasswordViewModel
     {

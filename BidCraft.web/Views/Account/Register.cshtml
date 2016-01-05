@@ -29,9 +29,39 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
+
+
+
+
+
+
+
+    //TODO Finish fields
     <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <form>
+        <input class="col-md-offset-2 col-md-10" type="radio"></input><div class="col-md-offset-2 col-md-10">Buyer</div>
+        <input type="radio" name="Creator" checked>Creator
+    </form>
+
+                        < div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+            <input type = "submit" class="btn btn-default" value="Register" />
         </div>
     </div>
 }

@@ -139,6 +139,7 @@ namespace BidCraft.web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            //Todo - prepopulate user type options (ask Daniel)
             return View();
         }
 
@@ -151,6 +152,7 @@ namespace BidCraft.web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Todo finish wiring up model.F, model.L, model.street to the application user
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
