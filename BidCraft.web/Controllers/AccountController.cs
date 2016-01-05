@@ -153,7 +153,18 @@ namespace BidCraft.web.Controllers
             if (ModelState.IsValid)
             {
                 //Todo finish wiring up model.F, model.L, model.street to the application user
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var user = new ApplicationUser { UserName = model.Email,
+                                                 Email = model.Email,
+                                                 FirstName = model.FirstName,
+                                                 LastName = model.LastName,
+                                                 Street = model.Street,
+                                                 Street2 = model.Street2,
+                                                 City = model.City,
+                                                 State = model.State,
+                                                 Zip = model.Zip,
+                                                 ProfilePic = model.ProfilePic
+                                                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

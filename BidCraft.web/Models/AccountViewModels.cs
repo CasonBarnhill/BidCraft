@@ -89,16 +89,25 @@ namespace BidCraft.web.Models
         [Display(Name = "First Name")]
         [Required]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        [Required]
         public string LastName { get; set; }
 
         // public UserType UserType { get; set; }
-
+        [Display(Name = "Profile Picture")]
         public string ProfilePic { get; set; }
-
+        [Display(Name = "Street Address")]
+        [Required]
         public string Street { get; set; }
         public string Street2 { get; set; }
+        [Display(Name = "City")]
+        [Required]
         public string City { get; set; }
+        [Display(Name = "State")]
+        [Required]
         public string State { get; set; }
+        [Display(Name = "Zip Code")]
+        [Required]
         public string Zip { get; set; }
 
 
