@@ -80,11 +80,6 @@ namespace BidCraft.web.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-
-
-
-
-
         //TODO Finish attributes
         [Display(Name = "First Name")]
         [Required]
@@ -92,7 +87,6 @@ namespace BidCraft.web.Models
         [Display(Name = "Last Name")]
         [Required]
         public string LastName { get; set; }
-
         // public UserType UserType { get; set; }
         [Display(Name = "Profile Picture")]
         public string ProfilePic { get; set; }
@@ -109,8 +103,6 @@ namespace BidCraft.web.Models
         [Display(Name = "Zip Code")]
         [Required]
         public string Zip { get; set; }
-
-
     }
 
 

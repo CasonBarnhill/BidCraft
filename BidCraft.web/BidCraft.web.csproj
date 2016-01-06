@@ -181,10 +181,16 @@
     <Compile Include="Migrations\201601052018125_ApUserPropsAdded.Designer.cs">
       <DependentUpon>201601052018125_ApUserPropsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601061742371_PostAndPIVM.cs" />
+    <Compile Include="Migrations\201601061742371_PostAndPIVM.Designer.cs">
+      <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostIndexVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601052018125_ApUserPropsAdded.resx">
       <DependentUpon>201601052018125_ApUserPropsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061742371_PostAndPIVM.resx">
+      <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
