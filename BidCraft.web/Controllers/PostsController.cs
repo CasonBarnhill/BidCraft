@@ -22,14 +22,31 @@ namespace BidCraft.web.Controllers
             var model = db.Posts.Select(x => new PostIndexVM()
             {
                 Buyer = x.Buyer,
-                Creator = x.Creator,
+                Id = x.Id,
+                PostedOn = x.PostedOn,
+                Url = x.Url,
+                ImageUrl = x.ImageUrl,
+                Text = x.Text,
+                Bid = x.Bid,
+                StartDate = x.StartDate
+
+            }).ToList();
 
 
-            });
-
-
-            return View(db.Posts.ToList());
+            return View(model);
         }
+
+        [HttpPost]
+
+        public ActionResult TrackProject(string postId)
+        {
+
+        }
+
+
+
+
+
 
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
