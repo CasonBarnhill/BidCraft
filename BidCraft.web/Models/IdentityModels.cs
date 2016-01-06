@@ -56,5 +56,7 @@ namespace BidCraft.web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<BidCraft.web.Models.Post> Posts { get; set; }
     }
 }
