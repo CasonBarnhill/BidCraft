@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201601061948271_alteredPost.Designer.cs">
       <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601061953364_alteredPost1.cs" />
+    <Compile Include="Migrations\201601061953364_alteredPost1.Designer.cs">
+      <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061948271_alteredPost.resx">
       <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061953364_alteredPost1.resx">
+      <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

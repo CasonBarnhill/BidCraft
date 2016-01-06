@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BidCraft.web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BidCraft.web.Controllers
 {
@@ -17,10 +18,12 @@ namespace BidCraft.web.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-          //  var currentUserId = User.Identity.GetUserId();
+            var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Select(x => new PostIndexVM()
             {
-                
+                Buyer = x.Buyer,
+                Creator = x.Creator,
+
 
             });
 
