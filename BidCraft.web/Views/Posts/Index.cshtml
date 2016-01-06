@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BidCraft.web.Models.Post>
+﻿@model IEnumerable<BidCraft.web.Models.PostIndexVM>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Project)
+            @Html.DisplayNameFor(model => model.PostedOn)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectStartDate)
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfBids)
         </th>
         <th></th>
     </tr>
@@ -26,13 +35,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Project)
+            @Html.DisplayFor(modelItem => item.PostedOn)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
+            @Html.DisplayFor(modelItem => item.StartDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProjectStartDate)
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfBids)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

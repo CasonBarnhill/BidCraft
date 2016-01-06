@@ -5,6 +5,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Web;
+using System;
+using System.Linq;
 
 namespace BidCraft.web.Models
 {
@@ -15,9 +18,9 @@ namespace BidCraft.web.Models
     }
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public class SiteUser : IdentityUser
     {
-        
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public UserType UserType { get; set; }
@@ -31,10 +34,12 @@ namespace BidCraft.web.Models
         public string State { get; set; }
         public string Zip { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<ApplicationUser> ProjectsITrack { get; set; }
+        public virtual ICollection<Post> MyPosts { get; set; }
+        public virtual ICollection<Bid> MyBids { get; set; }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<SiteUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -45,18 +50,43 @@ namespace BidCraft.web.Models
 
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class BidCraftDbContext : IdentityDbContext<SiteUser>
     {
-        public ApplicationDbContext()
+        public BidCraftDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static BidCraftDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new BidCraftDbContext();
         }
 
-        public System.Data.Entity.DbSet<BidCraft.web.Models.Post> Posts { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Bid> Bids { get; set; }
+
+        public override int SaveChanges()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is Entity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+
+            var currentUsername = HttpContext.Current != null && HttpContext.Current.User != null
+                ? HttpContext.Current.User.Identity.Name
+                : "Anonymous";
+
+            foreach (var entity in entities)
+            {
+                var e = (Entity)entity.Entity;
+                if (entity.State == EntityState.Added)
+                {
+                    e.CreatedOn = DateTime.Now;
+                    e.CreatedBy = currentUsername;
+                }
+
+                e.ModifiedOn = DateTime.Now;
+                e.ModifiedBy = currentUsername;
+            }
+
+            return base.SaveChanges();
+        }
     }
 }

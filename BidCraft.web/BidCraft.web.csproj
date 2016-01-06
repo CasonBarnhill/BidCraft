@@ -174,29 +174,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601042022325_initialcreate.cs" />
-    <Compile Include="Migrations\201601042022325_initialcreate.Designer.cs">
-      <DependentUpon>201601042022325_initialcreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601062137050_InitialCreation.cs" />
+    <Compile Include="Migrations\201601062137050_InitialCreation.Designer.cs">
+      <DependentUpon>201601062137050_InitialCreation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601052018125_ApUserPropsAdded.cs" />
-    <Compile Include="Migrations\201601052018125_ApUserPropsAdded.Designer.cs">
-      <DependentUpon>201601052018125_ApUserPropsAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061742371_PostAndPIVM.cs" />
-    <Compile Include="Migrations\201601061742371_PostAndPIVM.Designer.cs">
-      <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061948271_alteredPost.cs" />
-    <Compile Include="Migrations\201601061948271_alteredPost.Designer.cs">
-      <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601061953364_alteredPost1.cs" />
-    <Compile Include="Migrations\201601061953364_alteredPost1.Designer.cs">
-      <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601062056280_alteredPost2andpvm.cs" />
-    <Compile Include="Migrations\201601062056280_alteredPost2andpvm.Designer.cs">
-      <DependentUpon>201601062056280_alteredPost2andpvm.cs</DependentUpon>
+    <Compile Include="Migrations\201601062207124_postandbid.cs" />
+    <Compile Include="Migrations\201601062207124_postandbid.Designer.cs">
+      <DependentUpon>201601062207124_postandbid.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -280,23 +264,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601042022325_initialcreate.resx">
-      <DependentUpon>201601042022325_initialcreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601062137050_InitialCreation.resx">
+      <DependentUpon>201601062137050_InitialCreation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601052018125_ApUserPropsAdded.resx">
-      <DependentUpon>201601052018125_ApUserPropsAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061742371_PostAndPIVM.resx">
-      <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061948271_alteredPost.resx">
-      <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601061953364_alteredPost1.resx">
-      <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601062056280_alteredPost2andpvm.resx">
-      <DependentUpon>201601062056280_alteredPost2andpvm.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601062207124_postandbid.resx">
+      <DependentUpon>201601062207124_postandbid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

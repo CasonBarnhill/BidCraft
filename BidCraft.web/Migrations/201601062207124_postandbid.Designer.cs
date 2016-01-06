@@ -7,13 +7,13 @@ namespace BidCraft.web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class alteredPost1 : IMigrationMetadata
+    public sealed partial class postandbid : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(alteredPost1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(postandbid));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601061953364_alteredPost1"; }
+            get { return "201601062207124_postandbid"; }
         }
         
         string IMigrationMetadata.Source

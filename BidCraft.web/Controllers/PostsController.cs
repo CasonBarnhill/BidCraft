@@ -13,7 +13,7 @@ namespace BidCraft.web.Controllers
 {
     public class PostsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private BidCraftDbContext db = new BidCraftDbContext();
 
         // GET: Posts
         public ActionResult Index()
@@ -21,13 +21,12 @@ namespace BidCraft.web.Controllers
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Select(x => new PostIndexVM()
             {
-                Buyer = x.Buyer,
                 Id = x.Id,
-                PostedOn = x.PostedOn,
+                PostedOn = x.CreatedOn,
                 Url = x.Url,
                 ImageUrl = x.ImageUrl,
-                Text = x.Text,
-                Bid = x.Bid,
+                Title = x.Title,
+                NumberOfBids = x.Bids.Count(),
                 StartDate = x.StartDate
 
             }).ToList();
@@ -36,11 +35,12 @@ namespace BidCraft.web.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        //[HttpPost]
 
         //public ActionResult TrackProject(string postId)
         //{
-
+        //    var currentUserID = User.Identity.GetUserId();
+        //    var currentUser = db.Users.Find(currentUserID);
         //}
 
 
