@@ -11,6 +11,7 @@ namespace BidCraft.web.Models
         public string Project { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ProjectStartDate { get; set; }
-
+        public ApplicationUser Buyer { get; set; }
+        public ApplicationUser Creator { get; set; }
     }
 }

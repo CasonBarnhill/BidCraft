@@ -186,6 +186,10 @@
     <Compile Include="Migrations\201601061742371_PostAndPIVM.Designer.cs">
       <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601061948271_alteredPost.cs" />
+    <Compile Include="Migrations\201601061948271_alteredPost.Designer.cs">
+      <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -276,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061742371_PostAndPIVM.resx">
       <DependentUpon>201601061742371_PostAndPIVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601061948271_alteredPost.resx">
+      <DependentUpon>201601061948271_alteredPost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

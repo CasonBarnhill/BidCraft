@@ -17,6 +17,14 @@ namespace BidCraft.web.Controllers
         // GET: Posts
         public ActionResult Index()
         {
+          //  var currentUserId = User.Identity.GetUserId();
+            var model = db.Posts.Select(x => new PostIndexVM()
+            {
+                
+
+            });
+
+
             return View(db.Posts.ToList());
         }
 
