@@ -14,7 +14,8 @@ namespace BidCraft.web.Models
         public string ImageUrl { get; set; }
         public string Title { get; set; }
         public int NumberOfBids { get; set; }
-       
+        public bool AreMaterialsIncluded { get; set; }
+
 
     }
 }

@@ -35,15 +35,31 @@ namespace BidCraft.web.Controllers
             return View(model);
         }
 
-        //[HttpPost]
+        [HttpPost]
+        public ActionResult Create(string description)
+        {
+            var currentUserId = User.Identity.GetUserId();
 
-        //public ActionResult TrackProject(string postId)
-        //{
-        //    var currentUserID = User.Identity.GetUserId();
-        //    var currentUser = db.Users.Find(currentUserID);
-        //}
+            var post = new Post()
+            {
+                PostedOn = DateTime.Now,
+                ProjectOwner = db.Users.Find(currentUserId),
+                
+                //TODO make these fields be there
+                
+                //Url = Url,
+                //ImageUrl = ImageUrl,
+                //Bid = Bid,
+                //StartDate = StartDate,
+                //AreMaterialsIncluded = AreMaterialsIncluded,
+                Description = description
+            };
 
-
+            db.Posts.Add(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+           
+        }
 
 
 
