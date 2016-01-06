@@ -38,10 +38,10 @@ namespace BidCraft.web.Controllers
 
         [HttpPost]
 
-        public ActionResult TrackProject(string postId)
-        {
+        //public ActionResult TrackProject(string postId)
+        //{
 
-        }
+        //}
 
 
 

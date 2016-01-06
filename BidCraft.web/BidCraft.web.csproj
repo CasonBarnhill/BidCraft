@@ -194,6 +194,10 @@
     <Compile Include="Migrations\201601061953364_alteredPost1.Designer.cs">
       <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601062056280_alteredPost2andpvm.cs" />
+    <Compile Include="Migrations\201601062056280_alteredPost2andpvm.Designer.cs">
+      <DependentUpon>201601062056280_alteredPost2andpvm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -290,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601061953364_alteredPost1.resx">
       <DependentUpon>201601061953364_alteredPost1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601062056280_alteredPost2andpvm.resx">
+      <DependentUpon>201601062056280_alteredPost2andpvm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
