@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201601062246268_MaterialsforpostFinishforBid.Designer.cs">
       <DependentUpon>201601062246268_MaterialsforpostFinishforBid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601072108022_RemovedPostedOn.cs" />
+    <Compile Include="Migrations\201601072108022_RemovedPostedOn.Designer.cs">
+      <DependentUpon>201601072108022_RemovedPostedOn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601062246268_MaterialsforpostFinishforBid.resx">
       <DependentUpon>201601062246268_MaterialsforpostFinishforBid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601072108022_RemovedPostedOn.resx">
+      <DependentUpon>201601072108022_RemovedPostedOn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

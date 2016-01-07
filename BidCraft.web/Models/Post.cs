@@ -18,7 +18,6 @@ namespace BidCraft.web.Models
 
     public class Post : Entity
     {
-        public DateTime PostedOn { get; set; }
         public virtual SiteUser ProjectOwner { get; set; }
         public DateTime StartDate { get; set; }
         public string Url { get; set; }

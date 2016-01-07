@@ -69,9 +69,7 @@ namespace BidCraft.web.Models
         {
             var entities = ChangeTracker.Entries().Where(x => x.Entity is Entity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
-            var currentUsername = HttpContext.Current != null && HttpContext.Current.User != null
-                ? HttpContext.Current.User.Identity.Name
-                : "Anonymous";
+            var currentUsername = HttpContext.Current?.User?.Identity.Name ?? "Anonymous";
 
             foreach (var entity in entities)
             {

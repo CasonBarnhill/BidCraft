@@ -50,7 +50,6 @@ namespace BidCraft.web.Controllers
 
             var newPost = new Post()
             {
-                PostedOn = DateTime.Now,
                 ProjectOwner = db.Users.Find(currentUserId),
                 Url = post.Url,
                 ImageUrl = post.ImageUrl,
