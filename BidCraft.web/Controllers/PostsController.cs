@@ -27,7 +27,8 @@ namespace BidCraft.web.Controllers
                 ImageUrl = x.ImageUrl,
                 Title = x.Title,
                 NumberOfBids = x.Bids.Count(),
-                StartDate = x.StartDate
+                StartDate = x.StartDate,
+                AreMaterialsIncluded = x.AreMaterialsIncluded
 
             }).ToList();
 
@@ -35,34 +36,35 @@ namespace BidCraft.web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        //Posts/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public ActionResult Create(string description)
+        public ActionResult Create(Post post)
         {
             var currentUserId = User.Identity.GetUserId();
 
-            var post = new Post()
+            var newPost = new Post()
             {
                 PostedOn = DateTime.Now,
                 ProjectOwner = db.Users.Find(currentUserId),
-                
-                //TODO make these fields be there
-                
-                //Url = Url,
-                //ImageUrl = ImageUrl,
-                //Bid = Bid,
-                //StartDate = StartDate,
-                //AreMaterialsIncluded = AreMaterialsIncluded,
-                Description = description
+                Url = post.Url,
+                ImageUrl = post.ImageUrl,
+                StartDate = post.StartDate,
+                AreMaterialsIncluded = post.AreMaterialsIncluded,
+                Description = post.Description
             };
 
             db.Posts.Add(post);
             db.SaveChanges();
             return RedirectToAction("Index");
-           
+
         }
-
-
-
+      
 
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
@@ -79,30 +81,38 @@ namespace BidCraft.web.Controllers
             return View(post);
         }
 
-        // GET: Posts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Posts/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate")] Post post)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Posts.Add(post);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+       
+            
+            
+            
+            //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Posts.Add(post);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(post);
-        }
+        //    return View(post);
+        //}
 
-        // GET: Posts/Edit/5
+      
+            
+            
+            
+            // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -122,7 +132,7 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -167,5 +177,19 @@ namespace BidCraft.web.Controllers
             }
             base.Dispose(disposing);
         }
+        //[HttpPost]
+        //public ActionResult MyBid(string userId)
+        //{
+        //    var currentUserID = User.Identity.GetUserId();
+        //    var currentUser = db.Users.Find(currentUserID);
+
+        //    var personToFollow = db.Users.Find(userId);
+
+        //    currentUser.MyBids.Add(bidsMade);
+
+        //    db.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
     }
 }

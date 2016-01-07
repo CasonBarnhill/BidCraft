@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Post Feed</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -29,6 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.NumberOfBids)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AreMaterialsIncluded)
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +54,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NumberOfBids)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreMaterialsIncluded)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
