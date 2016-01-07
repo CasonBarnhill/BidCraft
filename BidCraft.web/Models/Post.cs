@@ -25,7 +25,6 @@ namespace BidCraft.web.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public bool AreMaterialsIncluded { get; set; }
-
         public virtual ICollection<Bid> Bids { get; set; }
      
     }
