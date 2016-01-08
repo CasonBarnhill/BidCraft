@@ -80,7 +80,7 @@ namespace BidCraft.web.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        //TODO Finish attributes
+        
         [Display(Name = "First Name")]
         [Required]
         public string FirstName { get; set; }

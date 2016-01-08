@@ -152,7 +152,7 @@ namespace BidCraft.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Todo finish wiring up model.F, model.L, model.street to the application user
+                
 
                 var user = new SiteUser { UserName = model.Email,
                                                  Email = model.Email,

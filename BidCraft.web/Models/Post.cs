@@ -26,7 +26,8 @@ namespace BidCraft.web.Models
         public string Description { get; set; }
         public bool AreMaterialsIncluded { get; set; }
         public virtual ICollection<Bid> Bids { get; set; }
-     
+  
+
     }
 
     public class Bid : Entity
@@ -35,7 +36,7 @@ namespace BidCraft.web.Models
         public virtual Post Post { get; set; }
         public int Amount { get; set; }
         public DateTime ProjectFinishByDate { get; set; }
-
+        
         public virtual bool IsWinningBid { get; set; }
 
     }

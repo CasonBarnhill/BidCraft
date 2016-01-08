@@ -15,12 +15,17 @@ namespace BidCraft.web.Controllers
     {
         private BidCraftDbContext db = new BidCraftDbContext();
 
+
         // GET: Bids
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int postId)
         {
             var currentUserId = User.Identity.GetUserId();
-            var model = db.Bids.Where(x => x.Bidder.Id == currentUserId);
-
+            var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
+            {
+                Amount = x.Amount,
+                ProjectFinishByFinishDate = x.ProjectFinishByDate
+            }).ToList();
             return View(model);
         }
 

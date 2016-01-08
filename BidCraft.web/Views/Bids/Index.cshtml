@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BidCraft.web.Models.Bid>
+﻿@model IEnumerable<BidCraft.web.Models.BidIndexVM>
 
 @{
     ViewBag.Title = "Index";
@@ -15,22 +15,7 @@
             @Html.DisplayNameFor(model => model.Amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectFinishByDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsWinningBid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
+            @Html.DisplayNameFor(model => model.ProjectFinishByFinishDate)
         </th>
         <th></th>
     </tr>
@@ -41,27 +26,12 @@
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProjectFinishByDate)
+            @Html.DisplayFor(modelItem => item.ProjectFinishByFinishDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsWinningBid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

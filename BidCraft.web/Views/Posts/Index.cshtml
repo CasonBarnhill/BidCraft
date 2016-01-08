@@ -11,6 +11,7 @@
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.PostedOn)
         </th>
@@ -37,6 +38,7 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>@Html.ActionLink("Bids For This Item", "Index", "Bids", new { postId = item.Id }, null)</td>
         <td>
             @Html.DisplayFor(modelItem => item.PostedOn)
         </td>
