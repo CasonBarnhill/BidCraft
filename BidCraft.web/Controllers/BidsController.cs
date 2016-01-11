@@ -23,6 +23,7 @@ namespace BidCraft.web.Controllers
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
             {
+                PostId = x.Id,
                 Amount = x.Amount,
                 ProjectFinishByFinishDate = x.ProjectFinishByDate
             }).ToList();
@@ -52,19 +53,19 @@ namespace BidCraft.web.Controllers
 
         // POST: Bids/Create
         [HttpPost]
-        public ActionResult Create(Bid bid)
+        public ActionResult Create(BidIndexVM bid)
         {
             var currentUserId = User.Identity.GetUserId();
 
             var newBid = new Bid()
             {
                 Amount = bid.Amount,
-                ProjectFinishByDate = bid.ProjectFinishByDate,
+                ProjectFinishByDate = bid.ProjectFinishByFinishDate,
             };
 
-            db.Bids.Add(bid);
+            db.Posts.Find(bid.PostId).Bids.Add(newBid);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Posts", "Posts");
 
         }
 

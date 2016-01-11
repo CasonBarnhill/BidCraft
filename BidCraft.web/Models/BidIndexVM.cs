@@ -9,6 +9,10 @@ namespace BidCraft.web.Models
     {
         public int Amount { get; set; }
         public DateTime ProjectFinishByFinishDate { get; set; }
+        public int PostId
+        {
+            get; set;
+        }
 
     }
 }
