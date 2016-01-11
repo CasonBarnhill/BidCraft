@@ -96,8 +96,12 @@ namespace BidCraft.web.Controllers
             var model = new PostDetailsVM();
             model.Id = post.Id;
             model.IsMine = post.ProjectOwner.Id == currentUserId;
-            
-            //todo....amount, finish by
+            model.Title = post.Title;
+            model.Url = post.Url;
+            model.ImageUrl = post.ImageUrl;
+            model.Description = post.Description;
+            model.AreMaterialsIncluded = post.AreMaterialsIncluded;
+                //todo....amount, finish by
 
 
             var bidsQuery = post.Bids.AsQueryable();

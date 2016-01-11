@@ -179,6 +179,10 @@
     <Compile Include="Migrations\201601111840134_initialcreate.Designer.cs">
       <DependentUpon>201601111840134_initialcreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601112037477_PDVMaddDescription.cs" />
+    <Compile Include="Migrations\201601112037477_PDVMaddDescription.Designer.cs">
+      <DependentUpon>201601112037477_PDVMaddDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidIndexVM.cs" />
@@ -269,6 +273,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601111840134_initialcreate.resx">
       <DependentUpon>201601111840134_initialcreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601112037477_PDVMaddDescription.resx">
+      <DependentUpon>201601112037477_PDVMaddDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,6 +30,7 @@ namespace BidCraft.web.Models
         public string ImageUrl { get; set; }
         public string Title { get; set; }
         public bool AreMaterialsIncluded { get; set; }
+        public string Description { get; set; } 
         public bool IsMine { get; set; }
 
         public ICollection<BidDetailsVM> Bids{ get; set; } = new List<BidDetailsVM>();
