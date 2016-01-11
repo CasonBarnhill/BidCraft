@@ -3,7 +3,7 @@ namespace BidCraft.web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreation : DbMigration
+    public partial class initialcreate : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,8 @@ namespace BidCraft.web.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ProjectFinishByDate = c.DateTime(nullable: false),
                         IsWinningBid = c.Boolean(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         CreatedBy = c.String(),
@@ -86,12 +88,12 @@ namespace BidCraft.web.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ProjectStartDate = c.DateTime(nullable: false),
                         StartDate = c.DateTime(nullable: false),
                         Url = c.String(),
                         ImageUrl = c.String(),
                         Title = c.String(),
                         Description = c.String(),
+                        AreMaterialsIncluded = c.Boolean(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         CreatedBy = c.String(),
                         ModifiedOn = c.DateTime(nullable: false),

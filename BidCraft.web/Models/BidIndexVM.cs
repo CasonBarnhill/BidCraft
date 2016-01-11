@@ -7,12 +7,9 @@ namespace BidCraft.web.Models
 {
     public class BidIndexVM
     {
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
         public DateTime ProjectFinishByFinishDate { get; set; }
-        public int PostId
-        {
-            get; set;
-        }
+        public int PostId { get; set; }
 
     }
 }

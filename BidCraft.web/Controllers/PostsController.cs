@@ -11,15 +11,25 @@ using Microsoft.AspNet.Identity;
 
 namespace BidCraft.web.Controllers
 {
+    [Authorize]
     public class PostsController : Controller
     {
         private BidCraftDbContext db = new BidCraftDbContext();
 
         // GET: Posts
-        public ActionResult Index()
+        public ActionResult AllPosts(bool? userOnly)
         {
             var currentUserId = User.Identity.GetUserId();
-            var model = db.Posts.Select(x => new PostIndexVM()
+
+            var query = db.Posts.AsQueryable();
+
+            if (userOnly.GetValueOrDefault())
+            {
+                query = query.Where(x => x.ProjectOwner.Id == currentUserId);
+            }
+
+
+            var model = query.Select(x => new PostIndexVM()
             {
                 Id = x.Id,
                 PostedOn = x.CreatedOn,
@@ -28,13 +38,14 @@ namespace BidCraft.web.Controllers
                 Title = x.Title,
                 NumberOfBids = x.Bids.Count(),
                 StartDate = x.StartDate,
-                AreMaterialsIncluded = x.AreMaterialsIncluded
-
+                AreMaterialsIncluded = x.AreMaterialsIncluded,
+                IsMine = x.ProjectOwner.Id == currentUserId
             }).ToList();
 
 
-            return View(model);
+            return View("Index", model);
         }
+
 
         [HttpGet]
         //Posts/Create
@@ -63,11 +74,13 @@ namespace BidCraft.web.Controllers
             return RedirectToAction("Index");
 
         }
-      
+
 
         // GET: Posts/Details/5
         public ActionResult Details(int? id)
         {
+            var currentUserId = User.Identity.GetUserId();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -77,41 +90,32 @@ namespace BidCraft.web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(post);
+
+
+
+            var model = new PostDetailsVM();
+            model.Id = post.Id;
+            model.IsMine = post.ProjectOwner.Id == currentUserId;
+            
+            //todo....amount, finish by
+
+
+            var bidsQuery = post.Bids.AsQueryable();
+
+            //this isn't my post. then filter the bids shown to be just mine.
+            if (!model.IsMine)
+            {
+                bidsQuery = bidsQuery.Where(x => x.Bidder.Id == currentUserId);
+            }
+
+
+
+            model.Bids = bidsQuery.Select(b => new BidDetailsVM { Id = b.Id, Amount = b.Amount, ProjectFinishByDate = b.ProjectFinishByDate }).ToList();
+
+            return View(model);
         }
 
-        //// GET: Posts/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        // POST: Posts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-       
-            
-            
-            
-            //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Posts.Add(post);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(post);
-        //}
-
-      
-            
-            
-            
-            // GET: Posts/Edit/5
+        // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)

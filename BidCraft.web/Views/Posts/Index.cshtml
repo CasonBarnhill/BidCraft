@@ -36,36 +36,43 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.ActionLink("Bids For This Item", "Index", "Bids", new { postId = item.Id }, null)</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberOfBids)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AreMaterialsIncluded)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr class='@(item.IsMine ? "mypost" :  "")'>
+            <td>@Html.ActionLink("Bids For This Item", "Index", "Bids", new { postId = item.Id }, null)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBids)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AreMaterialsIncluded)
+            </td>
+            <td>
+                @if (item.IsMine)
+                {
+                    <text>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                    </text>
+                }
+
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

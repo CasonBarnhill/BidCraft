@@ -175,25 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601062137050_InitialCreation.cs" />
-    <Compile Include="Migrations\201601062137050_InitialCreation.Designer.cs">
-      <DependentUpon>201601062137050_InitialCreation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601062207124_postandbid.cs" />
-    <Compile Include="Migrations\201601062207124_postandbid.Designer.cs">
-      <DependentUpon>201601062207124_postandbid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601062234413_postaddedPostedOn.cs" />
-    <Compile Include="Migrations\201601062234413_postaddedPostedOn.Designer.cs">
-      <DependentUpon>201601062234413_postaddedPostedOn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601062246268_MaterialsforpostFinishforBid.cs" />
-    <Compile Include="Migrations\201601062246268_MaterialsforpostFinishforBid.Designer.cs">
-      <DependentUpon>201601062246268_MaterialsforpostFinishforBid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601072108022_RemovedPostedOn.cs" />
-    <Compile Include="Migrations\201601072108022_RemovedPostedOn.Designer.cs">
-      <DependentUpon>201601072108022_RemovedPostedOn.cs</DependentUpon>
+    <Compile Include="Migrations\201601111840134_initialcreate.cs" />
+    <Compile Include="Migrations\201601111840134_initialcreate.Designer.cs">
+      <DependentUpon>201601111840134_initialcreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -283,20 +267,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601062137050_InitialCreation.resx">
-      <DependentUpon>201601062137050_InitialCreation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601062207124_postandbid.resx">
-      <DependentUpon>201601062207124_postandbid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601062234413_postaddedPostedOn.resx">
-      <DependentUpon>201601062234413_postaddedPostedOn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601062246268_MaterialsforpostFinishforBid.resx">
-      <DependentUpon>201601062246268_MaterialsforpostFinishforBid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601072108022_RemovedPostedOn.resx">
-      <DependentUpon>201601072108022_RemovedPostedOn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601111840134_initialcreate.resx">
+      <DependentUpon>201601111840134_initialcreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

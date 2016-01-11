@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BidCraft.web.Controllers
 {
+    [Authorize]
     public class BidsController : Controller
     {
         private BidCraftDbContext db = new BidCraftDbContext();
@@ -18,6 +19,7 @@ namespace BidCraft.web.Controllers
 
         // GET: Bids
         [HttpGet]
+        
         public ActionResult Index(int postId)
         {
             var currentUserId = User.Identity.GetUserId();
@@ -29,6 +31,7 @@ namespace BidCraft.web.Controllers
             }).ToList();
             return View(model);
         }
+
 
         // GET: Bids/Details/5
         public ActionResult Details(int? id)
@@ -44,6 +47,7 @@ namespace BidCraft.web.Controllers
             }
             return View(bid);
         }
+
 
         // GET: Bids/Create
         public ActionResult Create()
@@ -72,6 +76,7 @@ namespace BidCraft.web.Controllers
         // GET: Bids/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -81,6 +86,14 @@ namespace BidCraft.web.Controllers
             {
                 return HttpNotFound();
             }
+
+            var currentUserId = User.Identity.GetUserId();
+            if (bid.Bidder.Id != currentUserId)
+            {
+                return new HttpUnauthorizedResult("This is not yours.");
+            }
+
+
             return View(bid);
         }
 
@@ -89,7 +102,7 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Amount,ProjectFinishByDate,IsWinningBid,CreatedOn,CreatedBy,ModifiedOn,ModifiedBy")] Post bid)
+        public ActionResult Edit([Bind(Include = "IsWinningBid")] Post bid)
         {
             if (ModelState.IsValid)
             {
