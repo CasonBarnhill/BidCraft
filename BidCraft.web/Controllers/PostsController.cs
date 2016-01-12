@@ -58,10 +58,11 @@ namespace BidCraft.web.Controllers
         public ActionResult Create(Post post)
         {
             var currentUserId = User.Identity.GetUserId();
+            var currentUser = db.Users.Find(currentUserId);
 
             var newPost = new Post()
             {
-                ProjectOwner = db.Users.Find(currentUserId),
+                ProjectOwner = currentUser,
                 Url = post.Url,
                 ImageUrl = post.ImageUrl,
                 StartDate = post.StartDate,
@@ -69,9 +70,11 @@ namespace BidCraft.web.Controllers
                 Description = post.Description
             };
 
-            db.Posts.Add(post);
+            currentUser.MyPosts.Add(newPost);
+
+            //db.Posts.Add(post);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllPosts");
 
         }
 
@@ -114,7 +117,11 @@ namespace BidCraft.web.Controllers
 
 
 
-            model.Bids = bidsQuery.Select(b => new BidDetailsVM { Id = b.Id, Amount = b.Amount, ProjectFinishByDate = b.ProjectFinishByDate }).ToList();
+            model.Bids = bidsQuery.Select(b => new BidDetailsVM {
+                Id = b.Id,
+                Amount = b.Amount,
+                ProjectFinishByDate = b.ProjectFinishByDate
+            }).ToList();
 
             return View(model);
         }
@@ -139,13 +146,13 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
+        public ActionResult Edit([Bind(Include = "Id,Title,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AllPosts");
             }
             return View(post);
         }
@@ -173,7 +180,7 @@ namespace BidCraft.web.Controllers
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllPosts");
         }
 
         protected override void Dispose(bool disposing)

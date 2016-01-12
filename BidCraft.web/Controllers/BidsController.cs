@@ -25,7 +25,8 @@ namespace BidCraft.web.Controllers
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
             {
-                PostId = x.Id,
+                PostId = postId,
+                BidId = x.Id,
                 Amount = x.Amount,
                 ProjectFinishByFinishDate = x.ProjectFinishByDate
             }).ToList();
@@ -33,26 +34,32 @@ namespace BidCraft.web.Controllers
         }
 
 
-        // GET: Bids/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Bid bid = db.Bids.Find(id);
-            if (bid == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bid);
-        }
+        //// GET: Bids/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Bid bid = db.Bids.Find(id);
+        //    if (bid == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(bid);
+        //}
 
 
         // GET: Bids/Create
-        public ActionResult Create()
+        public ActionResult Create(int postid)
         {
-            return View();
+
+            var model = new BidIndexVM();
+            model.PostId = postid;
+            model.ProjectFinishByFinishDate = DateTime.Now; 
+
+
+            return View(model);
         }
 
         // POST: Bids/Create
@@ -60,16 +67,21 @@ namespace BidCraft.web.Controllers
         public ActionResult Create(BidIndexVM bid)
         {
             var currentUserId = User.Identity.GetUserId();
-
+            var currentUser = db.Users.Find(currentUserId);
+            var post = db.Posts.Find(bid.PostId);
             var newBid = new Bid()
             {
+                Post = post,
+                Bidder = currentUser,
                 Amount = bid.Amount,
                 ProjectFinishByDate = bid.ProjectFinishByFinishDate,
             };
+            currentUser.MyBids.Add(newBid);
+            post.Bids.Add(newBid);
 
-            db.Posts.Find(bid.PostId).Bids.Add(newBid);
+          
             db.SaveChanges();
-            return RedirectToAction("Posts", "Posts");
+            return RedirectToAction("AllPosts", "Posts");
 
         }
 

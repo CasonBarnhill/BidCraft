@@ -255,7 +255,6 @@
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Bids\Create.cshtml" />
     <Content Include="Views\Bids\Delete.cshtml" />
-    <Content Include="Views\Bids\Details.cshtml" />
     <Content Include="Views\Bids\Edit.cshtml" />
     <Content Include="Views\Bids\Index.cshtml" />
   </ItemGroup>

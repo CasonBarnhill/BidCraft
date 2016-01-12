@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "Bid", FormMethod.Post, new { bid = Model }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +15,7 @@
         <h4>Bid</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        @Html.HiddenFor(model=> model.PostId)
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -42,7 +42,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Bids")
 </div>
 
 @section Scripts {
