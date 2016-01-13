@@ -80,7 +80,7 @@ namespace BidCraft.web.Models
                     e.CreatedBy = currentUsername;
                 }
 
-                e.ModifiedOn = DateTime.MaxValue;
+                e.ModifiedOn = DateTime.Now;
                 e.ModifiedBy = currentUsername;
             }
 

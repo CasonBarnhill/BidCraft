@@ -22,6 +22,8 @@ namespace BidCraft.web.Controllers
         
         public ActionResult Index(int postId)
         {
+            ViewBag.PostId = postId;
+
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
             {
@@ -53,7 +55,7 @@ namespace BidCraft.web.Controllers
         // GET: Bids/Create
         public ActionResult Create(int postid)
         {
-
+            ViewBag.PostId = postid;
             var model = new BidIndexVM();
             model.PostId = postid;
             model.ProjectFinishByFinishDate = DateTime.Now; 
@@ -114,13 +116,13 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IsWinningBid")] Post bid)
+        public ActionResult Edit( Bid bid)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(bid).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { postId = bid.Id } );
             }
             return View(bid);
         }

@@ -38,7 +38,7 @@
 
     @foreach (var item in Model)
     {
-        <tr class='@(item.IsMine ? "mypost" :  "")'>
+        <tr class='@(item.IsMine ? "mypost" : "")'>
             <td>@Html.ActionLink("Bids For This Item", "Index", "Bids", new { postId = item.Id }, null)</td>
             <td>
                 @Html.DisplayFor(modelItem => item.PostedOn)
@@ -64,15 +64,26 @@
             <td>
                 @if (item.IsMine)
                 {
-                    <text>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    <text>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                     </text>
                 }
 
                 @Html.ActionLink("Details", "Details", new { id = item.Id })
             </td>
         </tr>
+        foreach (var bid in item.Bids)
+        {
+            @bid.Amount
+            @Html.ActionLink("Bid Now!", "create", "bids", new { postid = bid.PostId }, new { @class = "btn btn-primary" })
+
+        }
+
     }
+        
+        
+    
 
 </table>

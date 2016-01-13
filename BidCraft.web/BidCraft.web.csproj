@@ -183,6 +183,18 @@
     <Compile Include="Migrations\201601112037477_PDVMaddDescription.Designer.cs">
       <DependentUpon>201601112037477_PDVMaddDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601122019457_BidIdtoBIVM.cs" />
+    <Compile Include="Migrations\201601122019457_BidIdtoBIVM.Designer.cs">
+      <DependentUpon>201601122019457_BidIdtoBIVM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601122041493_nullableDateTimes.cs" />
+    <Compile Include="Migrations\201601122041493_nullableDateTimes.Designer.cs">
+      <DependentUpon>201601122041493_nullableDateTimes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601132318480_ListBidsOnPIVM.cs" />
+    <Compile Include="Migrations\201601132318480_ListBidsOnPIVM.Designer.cs">
+      <DependentUpon>201601132318480_ListBidsOnPIVM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidIndexVM.cs" />
@@ -275,6 +287,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601112037477_PDVMaddDescription.resx">
       <DependentUpon>201601112037477_PDVMaddDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601122019457_BidIdtoBIVM.resx">
+      <DependentUpon>201601122019457_BidIdtoBIVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601122041493_nullableDateTimes.resx">
+      <DependentUpon>201601122041493_nullableDateTimes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601132318480_ListBidsOnPIVM.resx">
+      <DependentUpon>201601132318480_ListBidsOnPIVM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
