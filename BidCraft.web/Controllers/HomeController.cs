@@ -13,7 +13,7 @@ namespace BidCraft.web.Controllers
         private BidCraftDbContext db = new BidCraftDbContext();
 
 
-        public ActionResult AllPostsFromUsers(int postId)
+        public ActionResult AllPostsFromUsers()
         {
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Select(x => new PostIndexVM
