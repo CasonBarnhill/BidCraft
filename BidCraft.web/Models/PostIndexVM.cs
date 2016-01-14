@@ -17,7 +17,8 @@ namespace BidCraft.web.Models
         public bool AreMaterialsIncluded { get; set; }
         public bool IsMine { get; set; }
         public ICollection<BidIndexVM> Bids { get; set; } = new List<BidIndexVM>();
-
+        public string Creator { get; set; }
+        public string Buyer { get; set; }
 
 
 

@@ -23,7 +23,6 @@ namespace BidCraft.web.Controllers
         public ActionResult Index(int postId)
         {
             ViewBag.PostId = postId;
-
             var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
             {

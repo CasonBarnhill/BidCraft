@@ -104,7 +104,7 @@ namespace BidCraft.web.Controllers
             model.ImageUrl = post.ImageUrl;
             model.Description = post.Description;
             model.AreMaterialsIncluded = post.AreMaterialsIncluded;
-                //todo....amount, finish by
+                
 
 
             var bidsQuery = post.Bids.AsQueryable();

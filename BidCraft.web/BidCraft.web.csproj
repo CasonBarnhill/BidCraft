@@ -195,6 +195,10 @@
     <Compile Include="Migrations\201601132318480_ListBidsOnPIVM.Designer.cs">
       <DependentUpon>201601132318480_ListBidsOnPIVM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601142119222_buyerCreatorToPIVM.cs" />
+    <Compile Include="Migrations\201601142119222_buyerCreatorToPIVM.Designer.cs">
+      <DependentUpon>201601142119222_buyerCreatorToPIVM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidIndexVM.cs" />
@@ -269,9 +273,11 @@
     <Content Include="Views\Bids\Delete.cshtml" />
     <Content Include="Views\Bids\Edit.cshtml" />
     <Content Include="Views\Bids\Index.cshtml" />
+    <Content Include="Views\Home\AllPostsFromUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601132318480_ListBidsOnPIVM.resx">
       <DependentUpon>201601132318480_ListBidsOnPIVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601142119222_buyerCreatorToPIVM.resx">
+      <DependentUpon>201601142119222_buyerCreatorToPIVM.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
