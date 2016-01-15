@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2></h2>
+
 
 @*@Html.ActionLink("Bid", "Create", "Bids", new { postid = ViewBag.PostId }, null)*@
 @*@Html.ActionLink("Bid Now!", "create", "bids", new { postid = ViewBag.PostId }, new { @class = "btn btn-primary" })*@
@@ -19,6 +20,10 @@
             @Html.DisplayNameFor(model => model.ProjectFinishByFinishDate)
         </th>
     </tr>
+    
+    @Html.ActionLink("Bid Now!", "create", "bids", new { postid = ViewBag.PostId }, new { @class = "btn btn-primary" })
+
+
 
 
 @foreach (var item in Model)
@@ -39,12 +44,26 @@
         @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary" })
     }
+    else
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = item.BidId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.BidId }, new { @class = "btn btn-primary" })
+
+
+    }
     </td>
   
     </tr>
-}
 
+    if (!item.IsMine)
+    {
+    @Html.ActionLink("Bid Now!", "create", "bids", new { postid = ViewBag.PostId }, new { @class = "btn btn-primary" })
+
+    }
+}
 </table>
    
+
+
 
 

@@ -19,7 +19,7 @@ namespace BidCraft.web.Controllers
 
         // GET: Bids
         [HttpGet]
-        
+
         public ActionResult Index(int postId)
         {
             ViewBag.PostId = postId;
@@ -58,7 +58,7 @@ namespace BidCraft.web.Controllers
             ViewBag.PostId = postid;
             var model = new BidIndexVM();
             model.PostId = postid;
-            model.ProjectFinishByFinishDate = DateTime.Now; 
+            model.ProjectFinishByFinishDate = DateTime.Now;
 
 
             return View(model);
@@ -78,11 +78,11 @@ namespace BidCraft.web.Controllers
                 Amount = bid.Amount,
                 ProjectFinishByDate = bid.ProjectFinishByFinishDate,
             };
-            
+
             currentUser.MyBids.Add(newBid);
             post.Bids.Add(newBid);
 
-          
+
             db.SaveChanges();
             return RedirectToAction("AllPosts", "Posts");
 
@@ -108,8 +108,9 @@ namespace BidCraft.web.Controllers
                 return new HttpUnauthorizedResult("This is not yours.");
             }
 
+            var model = new BidEditVM { BidId = bid.Id, Amount = bid.Amount, FinishDate = bid.ProjectFinishByDate };
 
-            return View(bid);
+            return View(model);
         }
 
         // POST: Bids/Edit/5
@@ -117,14 +118,18 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Bid bid)
+        public ActionResult Edit(BidEditVM bid)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bid).State = EntityState.Modified;
+                var existingBid = db.Bids.Find(bid.BidId);
+                existingBid.Amount = bid.Amount;
+                existingBid.ProjectFinishByDate = bid.FinishDate;
                 db.SaveChanges();
-                return RedirectToAction("Index", new { postId = bid.Id } );
+
+                return RedirectToAction("Index", new { postId = existingBid.Post.Id });
             }
+
             return View(bid);
         }
 
