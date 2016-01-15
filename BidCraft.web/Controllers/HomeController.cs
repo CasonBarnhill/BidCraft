@@ -22,6 +22,7 @@ namespace BidCraft.web.Controllers
                 PostedOn = x.CreatedOn,
                 Url = x.Url,
                 ImageUrl = x.ImageUrl,
+                Description = x.Description,
                 Title = x.Title,
                 StartDate = x.StartDate,
                 AreMaterialsIncluded = x.AreMaterialsIncluded,

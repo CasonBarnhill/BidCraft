@@ -21,9 +21,10 @@
     </tr>
 
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
-        <td></td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
@@ -31,14 +32,19 @@
             @Html.DisplayFor(modelItem => item.ProjectFinishByFinishDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.BidId  }, new { @class = "btn btn-primary" }) 
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary" })
-        </td>
+    @if (!item.IsMine)
+    {
 
+        @Html.ActionLink("Edit", "Edit", new { id = item.BidId }, new { @class = "btn btn-primary" })
+        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-primary" })
+    }
+    </td>
+  
     </tr>
 }
+
 </table>
-@Html.ActionLink("Bid Now!", "create", "bids", new { postid = ViewBag.PostId }, new { @class = "btn btn-primary" })
+   
 
 

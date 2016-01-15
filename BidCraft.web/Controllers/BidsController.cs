@@ -29,7 +29,8 @@ namespace BidCraft.web.Controllers
                 PostId = postId,
                 BidId = x.Id,
                 Amount = x.Amount,
-                ProjectFinishByFinishDate = x.ProjectFinishByDate
+                ProjectFinishByFinishDate = x.ProjectFinishByDate,
+                IsMine = x.Bidder.Id == currentUserId
             }).ToList();
             return View(model);
         }
@@ -77,6 +78,7 @@ namespace BidCraft.web.Controllers
                 Amount = bid.Amount,
                 ProjectFinishByDate = bid.ProjectFinishByFinishDate,
             };
+            
             currentUser.MyBids.Add(newBid);
             post.Bids.Add(newBid);
 

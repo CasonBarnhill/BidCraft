@@ -19,6 +19,7 @@ namespace BidCraft.web.Models
         public ICollection<BidIndexVM> Bids { get; set; } = new List<BidIndexVM>();
         public string Creator { get; set; }
         public string Buyer { get; set; }
+        public string Description { get; set; }
 
 
 
