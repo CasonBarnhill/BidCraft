@@ -154,9 +154,10 @@ namespace BidCraft.web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Bid bid = db.Bids.Find(id);
+            var postId = bid.Post.Id;
             db.Bids.Remove(bid);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { postid = postId });
         }
 
         protected override void Dispose(bool disposing)
