@@ -15,40 +15,22 @@ namespace BidCraft.web.Models
         public string Title { get; set; }
         public int NumberOfBids { get; set; }
         public bool AreMaterialsIncluded { get; set; }
-        public bool IsMine { get; set; }
-        public ICollection<BidIndexVM> Bids { get; set; } = new List<BidIndexVM>();
+        public bool IsMyPost { get; set; }
         public string Creator { get; set; }
         public string Buyer { get; set; }
         public string Description { get; set; }
 
-
-
-    }
-
-    public class PostDetailsVM
-    {
-        public int Id { get; set; }
-        public DateTime? PostedOn { get; set; }
-        public DateTime? StartDate { get; set; }
-        public string Url { get; set; }
-        public string ImageUrl { get; set; }
-        public string Title { get; set; }
-        public bool AreMaterialsIncluded { get; set; }
-        public string Description { get; set; } 
-        public bool IsMine { get; set; }
-
-        public ICollection<BidDetailsVM> Bids{ get; set; } = new List<BidDetailsVM>();
-
+        public ICollection<BidIndexVM> Bids { get; set; } = new List<BidIndexVM>();
 
     }
 
-    public class BidDetailsVM
+    public class BidIndexVM
     {
-        public int Id { get; set; }
-        public DateTime? ProjectFinishByDate { get; set; }
-        public decimal Amount { get; set; }
-
-
-
+        public int PostId { get; set; }
+        public int BidId { get; set; }
+        public string Description { get; set; }
+        public bool IsMyBid { get; set; }
+        public decimal Amount { get; internal set; }
+        public DateTime ProjectFinishByDate { get; internal set; }
     }
 }

@@ -17,7 +17,7 @@ namespace BidCraft.web.Controllers
         private BidCraftDbContext db = new BidCraftDbContext();
 
         // GET: Posts
-        public ActionResult AllPosts(bool? userOnly)
+        public ActionResult Index(bool? userOnly)
         {
             var currentUserId = User.Identity.GetUserId();
 
@@ -39,11 +39,12 @@ namespace BidCraft.web.Controllers
                 NumberOfBids = x.Bids.Count(),
                 StartDate = x.StartDate,
                 AreMaterialsIncluded = x.AreMaterialsIncluded,
-                IsMine = x.ProjectOwner.Id == currentUserId
+                IsMyPost = x.ProjectOwner.Id == currentUserId,
+                //Bids = x.Bids.Select(b => new BidIndexVM()).ToList() //TODO fill out??
             }).ToList();
 
 
-            return View("Index", model);
+            return View(model);
         }
 
 
@@ -74,7 +75,7 @@ namespace BidCraft.web.Controllers
 
             //db.Posts.Add(post);
             db.SaveChanges();
-            return RedirectToAction("AllPosts");
+            return RedirectToAction("Index");
 
         }
 
@@ -95,10 +96,9 @@ namespace BidCraft.web.Controllers
             }
 
 
-
-            var model = new PostDetailsVM();
+            var model = new PostIndexVM();
             model.Id = post.Id;
-            model.IsMine = post.ProjectOwner.Id == currentUserId;
+            model.IsMyPost = post.ProjectOwner.Id == currentUserId;
             model.Title = post.Title;
             model.Url = post.Url;
             model.ImageUrl = post.ImageUrl;
@@ -110,15 +110,16 @@ namespace BidCraft.web.Controllers
             var bidsQuery = post.Bids.AsQueryable();
 
             //this isn't my post. then filter the bids shown to be just mine.
-            if (!model.IsMine)
-            {
-                bidsQuery = bidsQuery.Where(x => x.Bidder.Id == currentUserId);
-            }
+            //if (!model.IsMyPost)
+            //{
+            //    bidsQuery = bidsQuery.Where(x => x.Bidder.Id == currentUserId);
+            //}
 
 
 
-            model.Bids = bidsQuery.Select(b => new BidDetailsVM {
-                Id = b.Id,
+            model.Bids = bidsQuery.Select(b => new BidIndexVM {
+                PostId = b.Post.Id,
+                BidId = b.Id,
                 Amount = b.Amount,
                 ProjectFinishByDate = b.ProjectFinishByDate
             }).ToList();
@@ -146,13 +147,13 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Project,CreatedOn,ProjectStartDate,AreMaterialsIncluded")] Post post)
+        public ActionResult Edit(Post post)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("AllPosts");
+                return RedirectToAction("Index");
             }
             return View(post);
         }
@@ -191,19 +192,6 @@ namespace BidCraft.web.Controllers
             }
             base.Dispose(disposing);
         }
-        //[HttpPost]
-        //public ActionResult MyBid(string userId)
-        //{
-        //    var currentUserID = User.Identity.GetUserId();
-        //    var currentUser = db.Users.Find(currentUserID);
-
-        //    var personToFollow = db.Users.Find(userId);
-
-        //    currentUser.MyBids.Add(bidsMade);
-
-        //    db.SaveChanges();
-
-        //    return RedirectToAction("Index");
-        //}
+      
     }
 }

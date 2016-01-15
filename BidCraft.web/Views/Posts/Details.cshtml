@@ -1,4 +1,4 @@
-﻿@model BidCraft.web.Models.PostDetailsVM
+﻿@model BidCraft.web.Models.PostIndexVM
 
 @{
     ViewBag.Title = "Details";
@@ -67,22 +67,28 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsMine)
+            @Html.DisplayNameFor(model => model.IsMyPost)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsMine)
+            @Html.DisplayFor(model => model.IsMyPost)
         </dd>
 
     </dl>
 
-    @foreach (var bid in Model.Bids)
+    <ul>
+        @foreach (var bid in Model.Bids)
+        {
+            <li>@bid.Amount</li>
+        }
+    </ul>
+
+    @if (!Model.IsMyPost)
     {
-       <li>@bid.Amount</li>
+        @Html.ActionLink("Bid Now!", "create", "bids", new { postid = Model.Id }, new { @class = "btn btn-primary" })
     }
-    @Html.ActionLink("Bid Now!", "create", "bids", new { postid = Model.Id }, new { @class = "btn btn-primary" })
-</div>
-<p>
-    
-    @Html.ActionLink("Back to List", "AllPosts")
-</p>
+    </div>
+    <p>
+
+        @Html.ActionLink("Back to List", "Index")
+    </p>

@@ -16,49 +16,12 @@ namespace BidCraft.web.Controllers
     {
         private BidCraftDbContext db = new BidCraftDbContext();
 
-
-        // GET: Bids
-        [HttpGet]
-
-        public ActionResult Index(int postId)
-        {
-            ViewBag.PostId = postId;
-            var currentUserId = User.Identity.GetUserId();
-            var model = db.Posts.Find(postId).Bids.Select(x => new BidIndexVM()
-            {
-                PostId = postId,
-                BidId = x.Id,
-                Amount = x.Amount,
-                ProjectFinishByFinishDate = x.ProjectFinishByDate,
-                IsMine = x.Bidder.Id == currentUserId
-            }).ToList();
-            return View(model);
-        }
-
-
-        //// GET: Bids/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Bid bid = db.Bids.Find(id);
-        //    if (bid == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(bid);
-        //}
-
-
         // GET: Bids/Create
-        public ActionResult Create(int postid)
+        public ActionResult CreateBid(int postid)
         {
-            ViewBag.PostId = postid;
             var model = new BidIndexVM();
             model.PostId = postid;
-            model.ProjectFinishByFinishDate = DateTime.Now;
+            model.ProjectFinishByDate = DateTime.Now;
 
 
             return View(model);
@@ -66,7 +29,7 @@ namespace BidCraft.web.Controllers
 
         // POST: Bids/Create
         [HttpPost]
-        public ActionResult Create(BidIndexVM bid)
+        public ActionResult CreateBid(BidEditVM bid)
         {
             var currentUserId = User.Identity.GetUserId();
             var currentUser = db.Users.Find(currentUserId);
@@ -76,7 +39,7 @@ namespace BidCraft.web.Controllers
                 Post = post,
                 Bidder = currentUser,
                 Amount = bid.Amount,
-                ProjectFinishByDate = bid.ProjectFinishByFinishDate,
+                ProjectFinishByDate = bid.FinishDate,
             };
 
             currentUser.MyBids.Add(newBid);
@@ -84,7 +47,7 @@ namespace BidCraft.web.Controllers
 
 
             db.SaveChanges();
-            return RedirectToAction("AllPosts", "Posts");
+            return RedirectToAction("Details", "Posts", new { id = newBid.Post.Id });
 
         }
 
@@ -127,7 +90,7 @@ namespace BidCraft.web.Controllers
                 existingBid.ProjectFinishByDate = bid.FinishDate;
                 db.SaveChanges();
 
-                return RedirectToAction("Index", new { postId = existingBid.Post.Id });
+                return RedirectToAction("Details", "Posts", new { id = existingBid.Post.Id });
             }
 
             return View(bid);
@@ -157,7 +120,7 @@ namespace BidCraft.web.Controllers
             var postId = bid.Post.Id;
             db.Bids.Remove(bid);
             db.SaveChanges();
-            return RedirectToAction("Index", new { postid = postId });
+            return RedirectToAction("Details", "Posts", new { id = postId });
         }
 
         protected override void Dispose(bool disposing)

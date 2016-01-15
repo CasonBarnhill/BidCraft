@@ -1,4 +1,4 @@
-﻿@model BidCraft.web.Models.BidIndexVM
+﻿@model BidCraft.web.Models.BidEditVM
 
 @{
     ViewBag.Title = "Create";
@@ -15,7 +15,7 @@
         <h4>Bid</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model=> model.PostId)
+        @Html.HiddenFor(model => model.PostId)
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,10 +25,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ProjectFinishByFinishDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FinishDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectFinishByFinishDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectFinishByFinishDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.FinishDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -47,4 +47,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#Amount').mask("##0.00", { reverse: true });
+        $('#FinishDate').mask('00/00/0000');
+    </script>
 }

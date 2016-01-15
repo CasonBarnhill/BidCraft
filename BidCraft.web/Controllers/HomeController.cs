@@ -13,27 +13,7 @@ namespace BidCraft.web.Controllers
         private BidCraftDbContext db = new BidCraftDbContext();
 
 
-        public ActionResult AllPostsFromUsers()
-        {
-            var currentUserId = User.Identity.GetUserId();
-            var model = db.Posts.Select(x => new PostIndexVM
-            {
-                Id = x.Id,
-                PostedOn = x.CreatedOn,
-                Url = x.Url,
-                ImageUrl = x.ImageUrl,
-                Description = x.Description,
-                Title = x.Title,
-                StartDate = x.StartDate,
-                AreMaterialsIncluded = x.AreMaterialsIncluded,
-                IsMine = x.ProjectOwner.Id == currentUserId,
-                Buyer = x.CreatedBy.ToString()
-            }).ToList();
-
-            return View(model);
-        }
-
-        public ActionResult AllPostsFromUser(bool? userOnly)
+        public ActionResult Index(bool? userOnly)
         {
 
             var currentUserId = User.Identity.GetUserId();
@@ -56,23 +36,11 @@ namespace BidCraft.web.Controllers
                 NumberOfBids = x.Bids.Count(),
                 StartDate = x.StartDate,
                 AreMaterialsIncluded = x.AreMaterialsIncluded,
-                IsMine = x.ProjectOwner.Id == currentUserId
+                IsMyPost = x.ProjectOwner.Id == currentUserId
             }).ToList();
-            return View(model);
+            return View("Index", model);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "about";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
