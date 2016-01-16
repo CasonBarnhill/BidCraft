@@ -32,7 +32,7 @@ namespace BidCraft.web.Controllers
             var model = query.Select(x => new PostIndexVM()
             {
                 Id = x.Id,
-                PostedOn = x.CreatedOn,
+                PostedOn = x.CreatedOn.GetValueOrDefault(),
                 Url = x.Url,
                 ImageUrl = x.ImageUrl,
                 Title = x.Title,
