@@ -98,7 +98,7 @@
     <div id="main" ng-controller="PostsController">
         <div id="items" class="row-fluid">
 
-            <div class="item masonry-brick" ng-repeat="post in posts">
+            <div class="item masonry-brick" ng-repeat="post in posts" >
                 <div class="picture" >
                     <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id)" >
                         <img alt="" ng-src="{{post.ImageUrl}}" >
@@ -122,7 +122,7 @@
                         <span>
                             <i class="icon-heart-empty"></i>
                             <a class="btn btn-primary" >Show Bids</a>
-                        </span>
+                         </span>
                     </div>
                 </div>
             </div>
@@ -140,13 +140,13 @@
                     </div>
                     <div class="modal-body">
 
-                        <div class=" item masonry-brick" ng-repeat="b in showbids">
+                        <div class=" item masonry-brick" ng-repeat="b in showbids" ng-show="showbids.length">
                             {{b.PostTitle}} <br />
                             {{b.Amount | currency }}<br />
                             {{b.FinishDate | mydate | date:'medium'}} <br />
                             {{b.BidderName }} <br />
                         </div>
-
+                        <div ng-hide="showbids.length">There are no bids yet.</div>
 
 
                     </div>
