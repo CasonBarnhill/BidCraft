@@ -17,11 +17,11 @@ namespace BidCraft.web.Controllers
         private BidCraftDbContext db = new BidCraftDbContext();
 
         // GET: Bids/Create
-        public ActionResult CreateBid(int postid)
+        public ActionResult Create(int postid)
         {
-            var model = new BidIndexVM();
+            var model = new BidEditVM();
             model.PostId = postid;
-            model.ProjectFinishByDate = DateTime.Now;
+            model.FinishDate = DateTime.Now;
 
 
             return View(model);
@@ -29,7 +29,7 @@ namespace BidCraft.web.Controllers
 
         // POST: Bids/Create
         [HttpPost]
-        public ActionResult CreateBid(BidEditVM bid)
+        public ActionResult Create(BidEditVM bid)
         {
             var currentUserId = User.Identity.GetUserId();
             var currentUser = db.Users.Find(currentUserId);

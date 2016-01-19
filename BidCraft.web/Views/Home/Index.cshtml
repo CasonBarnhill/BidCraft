@@ -1,117 +1,21 @@
 ﻿@using Microsoft.AspNet.Identity;
 @{
-    
-    ViewBag.Title = "Get All Posts";
+
+    ViewBag.Title = "All Posts";
 }
 
-<style>
-    body {
-        color: #000000;
-        font-family: sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        background-color: #CCCCCC;
-        
-    }
-
-    .wrapper {
-    }
-
-    #main {
-        margin-bottom: 30px;
-        margin-top: 55px;
-    }
-
-    #items {
-    }
-
-        #items .item {
-            -moz-border-bottom-colors: none;
-            -moz-border-left-colors: none;
-            -moz-border-right-colors: none;
-            -moz-border-top-colors: none;
-            background: linear-gradient(to bottom, #F6F6F6 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
-            border-radius: 4px 4px 4px 4px;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
-            text-shadow: 0 1px 0 #DDDDDD;
-            width: 270px;
-            margin: 10px;
-            float: left;
-
-        }
-
-            #items .item .item-content {
-                padding: 10px;
-                overflow: hidden;
-            }
-
-            #items .item .picture .description {
-                margin-top: 10px;
-            }
-
-            #items .item .meta span {
-                font-size: 12px !important;
-                line-height: 16px !important;
-                margin-right: 5px;
-            }
-
-            #items .item .picture {
-                display: block;
-                position: relative;
-                z-index: 5;
-                border-top: 1px solid #999999;
-                border-radius: 4px 4px 4px 4px;
-            }
-
-                #items .item .picture a.image {
-                    display: block;
-                    height: auto;
-                    width: 100%;
-                }
-
-                #items .item .picture img {
-                    border-radius: 2px 2px 0px 0px;
-                    height: auto;
-                    position: relative;
-                    width: 100%;
-                    z-index: -1;
-                }
-
-    .picture img {
-        height: auto;
-        width: 100%;
-        
-        
-    }
 
 
-    .navbar-inner {
-        box-shadow: 0px 5px 10px #999 !important;
-    }
-
-
-    /* RESPONSIVE CSS HACKS
-     -------------------------------------------------- */
-    @@media (max-width: 768px) {
-        #main {
-            margin-top: 5px;
-        }
-        
-    }
-</style>
-
-
-
-<div class="wrapper" ng-app="BidCraft">
+<div class="wrapper" ng-app="BidCraft" ng-cloak>
     <div id="main" ng-controller="PostsController">
         <div id="items" class="row-fluid">
 
-            <div class="item masonry-brick" ng-repeat="post in posts" >
-                <div class="picture" >
-                    <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id, '@User.Identity.GetUserId()')"  >
-                    @*<a class="image" title=" {{post.Title}}" ng-click="Edit(post.Id)">
-                    <a class="image" title="{{post.Title}}" ng-click="Delete(post.Id)">*@
-                        <img alt="" ng-src="{{post.ImageUrl}}" >
+            <div class="item masonry-brick" ng-repeat="post in posts">
+                <div class="picture">
+                    <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id, '@User.Identity.GetUserId()')">
+                        @*<a class="image" title=" {{post.Title}}" ng-click="Edit(post.Id)">
+                            <a class="image" title="{{post.Title}}" ng-click="Delete(post.Id)">*@
+                        <img alt="" ng-src="{{post.ImageUrl}}">
                     </a>
                 </div>
 
@@ -123,30 +27,30 @@
                         <p>Are Materials Included? {{post.AreMaterialsIncluded ? 'Yes' : 'No'}}</p>
                         <p> Project starts on: {{post.StartDate | mydate | date:'medium'}}</p>
                     </div>
-                 
-                                <div class="meta">
-                                    <span>
-                                        <i class="icon-calendar"></i>
-                                        {{post.PostedOn  | mydate | date:'medium'}}
-                                    </span>
-                                    <span>
-                                        <i class="icon-user"></i>
-                                        <a href="#">{{post.Buyer}} </a>
-                                    </span>
-                                    @*<span>
-                                        <i class="icon-bar"></i>
-                                        <a href="#">{{post.Description}} </a>
-                                    </span>*@
-                                    <span>
-                                        <i class="icon-heart-empty"></i>
-                                        <a class="btn btn-primary">Show Bids</a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
-
+                    <div class="meta">
+                        <span>
+                            <i class="icon-calendar"></i>
+                            {{post.PostedOn  | mydate | date:'medium'}}
+                        </span>
+                        <span>
+                            <i class="icon-user"></i>
+                            <a href="#">{{post.Buyer}} </a>
+                        </span>
+                        @*<span>
+                                <i class="icon-bar"></i>
+                                <a href="#">{{post.Description}} </a>
+                            </span>*@
+                        <span>
+                            <i class="icon-heart-empty"></i>
+                            <a class="btn btn-primary"  ng-click="ShowBids(post.Id, '@User.Identity.GetUserId()')">Show Bids</a>
+                        </span>
                     </div>
+                </div>
+            </div>
+
+
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
@@ -163,16 +67,17 @@
                             {{b.Amount | currency }}<br />
                             {{b.FinishDate | mydate | date:'medium'}} <br />
                             {{b.BidderName }} <br />
+                           <a ng-show="b.IsMyBid" href= '@Url.Action("Edit", "Bids")/{{b.BidId}}'>Edit/DELETE</a>
                         </div>
                         <div ng-hide="showbids.length">There are no bids yet.</div>
                         <span>
                             <i class="icon-heart-empty"></i>
-                            <a class="btn btn-primary" ng-show="canAddBid" data->Add Bid</a>
+                            <a class="btn btn-primary" ng-show="canAddBid" href='@Url.Action("Create", "Bids")?postid={{showingPostId}}'>Add Bid</a>
                         </span>
 
                     </div>
                     <div class="modal-footer">
-                        {{ canAddBid }}
+                       
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -185,39 +90,5 @@
 
 
 @section scripts {
-    <script>
-        var app = angular.module('BidCraft', []);
-
-        app.filter("mydate", function () {
-            return function (x) {
-                return new Date(parseInt(x.substr(6)));
-
-            };
-        });
-
-        app.controller('PostsController', ['$scope', '$http', function ($scope, $http) {
-
-            $scope.posts = [];
-
-            $scope.showbids = [];
-
-            $http.get('/home/getallposts').success(function (data) {
-                $scope.posts = data;
-            });
-
-            $scope.ShowBids = function (postId, currentUserId) {
-
-                $('#myModal').modal('show');
-
-                $http.get('/home/getbidsbypost/' + postId).success(function (data) {
-                    $scope.showbids = data;
-                    $scope.canAddBid = data.find(function (element) { return element.BidderId == currentUserId }) == null;
-                });
-            }
-
-
-
-        }]);
-
-    </script>
+    <script src="~/Scripts/app.js" type="text/javascript"></script>
 }

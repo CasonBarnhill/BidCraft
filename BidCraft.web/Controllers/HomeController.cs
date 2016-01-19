@@ -44,6 +44,7 @@ namespace BidCraft.web.Controllers
 
         public ActionResult GetBidsByPost(int id)
         {
+            var currentUserId = User.Identity.GetUserId();
             var model = db.Posts.Find(id).Bids.Select(b => new
             {
                 PostTitle = b.Post.Title,
@@ -51,7 +52,8 @@ namespace BidCraft.web.Controllers
                 FinishDate = b.ProjectFinishByDate,
                 BidderName = b.Bidder.FirstName + " " + b.Bidder.LastName,
                 BidId = b.Id,
-                BidderId = b.Bidder.Id
+                BidderId = b.Bidder.Id,
+                IsMyBid = b.Bidder.Id == currentUserId
             }).ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
