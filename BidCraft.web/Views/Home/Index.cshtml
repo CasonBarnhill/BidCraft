@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity;
+@{
+    
     ViewBag.Title = "Get All Posts";
 }
 
@@ -40,6 +42,7 @@
 
             #items .item .item-content {
                 padding: 10px;
+                overflow: hidden;
             }
 
             #items .item .picture .description {
@@ -72,12 +75,13 @@
                     position: relative;
                     width: 100%;
                     z-index: -1;
-
                 }
 
     .picture img {
         height: auto;
         width: 100%;
+        
+        
     }
 
 
@@ -92,6 +96,7 @@
         #main {
             margin-top: 5px;
         }
+        
     }
 </style>
 
@@ -103,7 +108,7 @@
 
             <div class="item masonry-brick" ng-repeat="post in posts" >
                 <div class="picture" >
-                    <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id)"  >
+                    <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id, '@User.Identity.GetUserId()')"  >
                     @*<a class="image" title=" {{post.Title}}" ng-click="Edit(post.Id)">
                     <a class="image" title="{{post.Title}}" ng-click="Delete(post.Id)">*@
                         <img alt="" ng-src="{{post.ImageUrl}}" >
@@ -114,25 +119,11 @@
                 <div class="item-content">
                     <div class="description">
                         <p> {{post.Title}}</p>
-                        @*<p> {{post.Description}}</p>
-                          <p> {{post.AreMaterialsIncluded}}</p>
-                          <p> {{post.StartDate}}</p>*@
+                        <p> {{post.Description}}</p>
+                        <p>Are Materials Included? {{post.AreMaterialsIncluded ? 'Yes' : 'No'}}</p>
+                        <p> Project starts on: {{post.StartDate | mydate | date:'medium'}}</p>
                     </div>
-                    @*<div class="meta">
-                        <span>
-                            <i class=" body-content"></i>
-                            {{post.StartDate}}
-                        </span>
-                        <div class="meta">
-                            <span>
-                                <i class=" body-content"></i>
-                                {{post.AreMaterialsIncluded}}
-                            </span>
-                            <div class="meta">
-                                <span>
-                                    <i class=" body-content"></i>
-                                    {{post.Description}}
-                                </span>*@
+                 
                                 <div class="meta">
                                     <span>
                                         <i class="icon-calendar"></i>
@@ -172,19 +163,16 @@
                             {{b.Amount | currency }}<br />
                             {{b.FinishDate | mydate | date:'medium'}} <br />
                             {{b.BidderName }} <br />
-                            <span>
-                                <i class="icon-heart-empty"></i>
-                                <a class="btn btn-primary">Add Bid</a>
-                            </span>
                         </div>
                         <div ng-hide="showbids.length">There are no bids yet.</div>
                         <span>
                             <i class="icon-heart-empty"></i>
-                            <a class="btn btn-primary">Add Bid</a>
+                            <a class="btn btn-primary" ng-show="canAddBid" data->Add Bid</a>
                         </span>
 
                     </div>
                     <div class="modal-footer">
+                        {{ canAddBid }}
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -217,13 +205,13 @@
                 $scope.posts = data;
             });
 
-            $scope.ShowBids = function (postId) {
+            $scope.ShowBids = function (postId, currentUserId) {
 
-                console.log('la click!');
                 $('#myModal').modal('show');
 
                 $http.get('/home/getbidsbypost/' + postId).success(function (data) {
                     $scope.showbids = data;
+                    $scope.canAddBid = data.find(function (element) { return element.BidderId == currentUserId }) == null;
                 });
             }
 

@@ -32,7 +32,7 @@ namespace BidCraft.web.Controllers
             var model = query.Select(x => new PostIndexVM()
             {
                 Id = x.Id,
-                PostedOn = x.CreatedOn.GetValueOrDefault(),
+                PostedOn = x.CreatedOn ?? new DateTime(),
                 Url = x.Url,
                 ImageUrl = x.ImageUrl,
                 Title = x.Title,
@@ -75,7 +75,7 @@ namespace BidCraft.web.Controllers
 
             //db.Posts.Add(post);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
 
         }
 

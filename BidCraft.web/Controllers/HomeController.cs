@@ -50,7 +50,8 @@ namespace BidCraft.web.Controllers
                 Amount = b.Amount,
                 FinishDate = b.ProjectFinishByDate,
                 BidderName = b.Bidder.FirstName + " " + b.Bidder.LastName,
-                BidId = b.Id
+                BidId = b.Id,
+                BidderId = b.Bidder.Id
             }).ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
@@ -90,6 +91,7 @@ namespace BidCraft.web.Controllers
             Url = x.Url,
             ImageUrl = x.ImageUrl,
             Title = x.Title,
+            Description = x.Description,
             NumberOfBids = x.Bids.Count(),
             StartDate = x.StartDate,
             AreMaterialsIncluded = x.AreMaterialsIncluded,
