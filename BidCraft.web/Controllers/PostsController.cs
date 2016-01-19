@@ -181,7 +181,7 @@ namespace BidCraft.web.Controllers
             Post post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
-            return RedirectToAction("AllPosts");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

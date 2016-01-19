@@ -55,36 +55,50 @@ namespace BidCraft.web.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+        //todo ask daniel about this for Show Bids to be wired up
+        //public ActionResult ShowBids(int id)
+        //{
+        //    var model = db.Posts.Find(id).Bids.Select(b => new
+        //    {
+        //        Amount = b.Amount,
+        //        FinishDate = b.ProjectFinishByDate,
+        //        BidderName = b.Bidder.FirstName + " " + b.Bidder.LastName,
+        //        BidId = b.Id
+        //    }).ToList();
 
-        public ActionResult GetAllPosts(bool? userOnly)
+        //    return Json(model, JsonRequestBehavior.AllowGet);
+
+        //}
+
+    public ActionResult GetAllPosts(bool? userOnly)
+    {
+
+        var currentUserId = User.Identity.GetUserId();
+
+        var query = db.Posts.AsQueryable();
+
+        if (userOnly.GetValueOrDefault())
         {
-
-            var currentUserId = User.Identity.GetUserId();
-
-            var query = db.Posts.AsQueryable();
-
-            if (userOnly.GetValueOrDefault())
-            {
-                query = query.Where(x => x.ProjectOwner.Id == currentUserId);
-            }
-
-
-            var model = query.Select(x => new PostIndexVM()
-            {
-                Id = x.Id,
-                PostedOn = x.CreatedOn ?? DateTime.MinValue,
-                Url = x.Url,
-                ImageUrl = x.ImageUrl,
-                Title = x.Title,
-                NumberOfBids = x.Bids.Count(),
-                StartDate = x.StartDate,
-                AreMaterialsIncluded = x.AreMaterialsIncluded,
-                IsMyPost = x.ProjectOwner.Id == currentUserId,
-                Buyer = x.ProjectOwner.FirstName + " " + x.ProjectOwner.LastName
-            }).ToList();
-
-            return Json(model, JsonRequestBehavior.AllowGet);
+            query = query.Where(x => x.ProjectOwner.Id == currentUserId);
         }
 
+
+        var model = query.Select(x => new PostIndexVM()
+        {
+            Id = x.Id,
+            PostedOn = x.CreatedOn ?? DateTime.MinValue,
+            Url = x.Url,
+            ImageUrl = x.ImageUrl,
+            Title = x.Title,
+            NumberOfBids = x.Bids.Count(),
+            StartDate = x.StartDate,
+            AreMaterialsIncluded = x.AreMaterialsIncluded,
+            IsMyPost = x.ProjectOwner.Id == currentUserId,
+            Buyer = x.ProjectOwner.FirstName + " " + x.ProjectOwner.LastName
+        }).ToList();
+
+        return Json(model, JsonRequestBehavior.AllowGet);
     }
+
+}
 }
