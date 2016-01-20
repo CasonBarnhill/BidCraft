@@ -44,4 +44,32 @@ namespace BidCraft.web.Models
                   DateTime.Now.AddYears(2).ToShortDateString())
         { }
     }
+
+    public class PostEditVM
+    {
+        public int Id { get; set; }
+        public string OwnerName { get; set; }
+
+        [Required]
+        [Display(Name = "Proposed Start Date")]
+        public DateTime StartDate { get; set; }
+        [Required]
+        [Display(Name = "URL to Example of Project (i.e. Website)")]
+        public string Url { get; set; }
+        [Required]
+        [Display(Name = "URL to Image of Project")]
+        public string ImageUrl { get; set; }
+        [Required]
+        [Display(Name = "Short Title For Project")]
+        public string Title { get; set; }
+        [Required]
+        [Display(Name = "Project Description")]
+        public string Description { get; set; }
+        [Required]
+        [Display(Name = "Are you supplying the materials?")]
+        public bool AreMaterialsIncluded { get; set; }
+
+
+
+    }
 }

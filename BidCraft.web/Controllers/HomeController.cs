@@ -45,7 +45,8 @@ namespace BidCraft.web.Controllers
         public ActionResult GetBidsByPost(int id)
         {
             var currentUserId = User.Identity.GetUserId();
-            var model = db.Posts.Find(id).Bids.Select(b => new
+            var post = db.Posts.Find(id);
+            var model = post.Bids.Select(b => new
             {
                 PostTitle = b.Post.Title,
                 Amount = b.Amount,
@@ -56,7 +57,7 @@ namespace BidCraft.web.Controllers
                 IsMyBid = b.Bidder.Id == currentUserId
             }).ToList();
 
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(new { Bids = model, IsMyPost = post.ProjectOwner.Id == currentUserId  } , JsonRequestBehavior.AllowGet);
         }
         //todo ask daniel about this for Show Bids to be wired up
         //public ActionResult ShowBids(int id)

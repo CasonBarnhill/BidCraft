@@ -8,13 +8,14 @@
     background-color: #EEEEEE;
 }
 
-.postImageContainer { 
-    height: 280px; 
-    overflow: hidden; 
+.postImageContainer {
+    height: 240px;
+    overflow: hidden;
 }
-.postImageContainer img { 
-    width: 100%;
-}
+
+    .postImageContainer img {
+        width: 100%;
+    }
 
 
 /* Set padding to keep content from hitting the edges */
@@ -45,11 +46,6 @@ textarea {
 
 
 
-#main {
-    margin-bottom: 30px;
-    margin-top: 55px;
-}
-
 #items {
 }
 
@@ -62,18 +58,16 @@ textarea {
         border-radius: 4px 4px 4px 4px;
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
         text-shadow: 0 1px 0 #DDDDDD;
-        width: 270px;
-        margin: 10px;
-        float: left;
+        /*width: 270px;*/
+        /*float: left;*/
+        padding: 5px;
+        margin: 5px;
     }
 
         #items .item .item-content {
             padding: 10px;
         }
 
-        #items .item .picture .description {
-            margin-top: 10px;
-        }
 
         #items .item .meta span {
             font-size: 12px !important;
@@ -81,32 +75,10 @@ textarea {
             margin-right: 5px;
         }
 
-        #items .item .picture {
-            display: block;
-            position: relative;
-            z-index: 5;
-            border-top: 1px solid #999999;
-            border-radius: 4px 4px 4px 4px;
-        }
 
-            #items .item .picture a.image {
-                display: block;
-                height: auto;
-                width: 100%;
-            }
 
-            #items .item .picture img {
-                border-radius: 2px 2px 0px 0px;
-                height: auto;
-                position: relative;
-                width: 100%;
-                z-index: -1;
-            }
 
-.picture img {
-    height: auto;
-    width: 100%;
-}
+
 
 
 .navbar-inner {
@@ -120,4 +92,8 @@ textarea {
     #main {
         margin-top: 5px;
     }
+}
+
+.clearboth {
+    clear: both;
 }

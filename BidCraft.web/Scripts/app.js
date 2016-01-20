@@ -22,9 +22,11 @@ app.controller('PostsController', ['$scope', '$http', function ($scope, $http) {
         $('#myModal').modal('show');
 
         $http.get('/home/getbidsbypost/' + postId).success(function (data) {
-            $scope.showbids = data;
+            $scope.showbids = data.Bids;
             $scope.showingPostId = postId;
-            $scope.canAddBid = data.find(function (element) { return element.BidderId == currentUserId }) == null;
+            //NOT my post and I don't have any bids
+            console.log(data.IsMyPost);
+            $scope.canAddBid = !(data.IsMyPost) && (data.Bids.find(function (element) { return element.BidderId == currentUserId }) == null);
         });
     }
 

@@ -52,11 +52,14 @@ namespace BidCraft.web.Controllers
         //Posts/Create
         public ActionResult Create()
         {
+            var model = new PostEditVM();
+            model.StartDate = DateTime.Now.AddDays(1);
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Post post)
+        public ActionResult Create(PostEditVM post)
         {
             var currentUserId = User.Identity.GetUserId();
             var currentUser = db.Users.Find(currentUserId);
@@ -73,7 +76,7 @@ namespace BidCraft.web.Controllers
 
             currentUser.MyPosts.Add(newPost);
 
-            //db.Posts.Add(post);
+            db.Posts.Add(newPost);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
 
@@ -104,7 +107,7 @@ namespace BidCraft.web.Controllers
             model.ImageUrl = post.ImageUrl;
             model.Description = post.Description;
             model.AreMaterialsIncluded = post.AreMaterialsIncluded;
-                
+
 
 
             var bidsQuery = post.Bids.AsQueryable();
@@ -117,7 +120,8 @@ namespace BidCraft.web.Controllers
 
 
 
-            model.Bids = bidsQuery.Select(b => new BidIndexVM {
+            model.Bids = bidsQuery.Select(b => new BidIndexVM
+            {
                 PostId = b.Post.Id,
                 BidId = b.Id,
                 Amount = b.Amount,
@@ -139,7 +143,18 @@ namespace BidCraft.web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(post);
+
+            var model = new PostEditVM();
+            model.StartDate = post.StartDate;
+            model.AreMaterialsIncluded = post.AreMaterialsIncluded;
+            model.Description = post.Description;
+            model.Id = post.Id;
+            model.ImageUrl = post.ImageUrl;
+            model.OwnerName = post.ProjectOwner.FirstName + " " + post.ProjectOwner.LastName;
+            model.Title = post.Title;
+            model.Url = post.Url;
+
+            return View(model);
         }
 
         // POST: Posts/Edit/5
@@ -147,15 +162,26 @@ namespace BidCraft.web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(PostEditVM model)
         {
+            Post post = db.Posts.Find(model.Id);
+
             if (ModelState.IsValid)
             {
-                db.Entry(post).State = EntityState.Modified;
+                post.StartDate = model.StartDate;
+                post.AreMaterialsIncluded = model.AreMaterialsIncluded;
+                post.Description = model.Description;
+                post.ImageUrl = model.ImageUrl;
+                post.Title = model.Title;
+                post.Url = model.Url;
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            return View(post);
+
+
+            model.OwnerName = post.ProjectOwner.FirstName + " " + post.ProjectOwner.LastName;
+            return View(model);
         }
 
         // GET: Posts/Delete/5
@@ -192,6 +218,6 @@ namespace BidCraft.web.Controllers
             }
             base.Dispose(disposing);
         }
-      
+
     }
 }
