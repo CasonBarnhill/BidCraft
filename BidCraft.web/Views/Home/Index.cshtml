@@ -15,7 +15,7 @@
                     <a class="image" title="{{post.Title}}" ng-click="ShowBids(post.Id, '@User.Identity.GetUserId()')">
                         @*<a class="image" title=" {{post.Title}}" ng-click="Edit(post.Id)">
                             <a class="image" title="{{post.Title}}" ng-click="Delete(post.Id)">*@
-                        <img alt="" ng-src="{{post.ImageUrl}}">
+                        <div class="postImageContainer"><img alt="" ng-src="{{post.ImageUrl}}"></div>
                     </a>
                 </div>
 

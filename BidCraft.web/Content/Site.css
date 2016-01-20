@@ -8,6 +8,15 @@
     background-color: #EEEEEE;
 }
 
+.postImageContainer { 
+    height: 280px; 
+    overflow: hidden; 
+}
+.postImageContainer img { 
+    width: 100%;
+}
+
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
